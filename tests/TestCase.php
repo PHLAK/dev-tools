@@ -8,10 +8,10 @@ use Yoast\PHPUnitPolyfills\TestCases\TestCase as TestCasesTestCase;
 
 class TestCase extends TestCasesTestCase
 {
+    protected const STUBS_PATH = __DIR__ . '/../stubs';
     protected const TEST_DATA_PATH = __DIR__ . '/_data';
 
-    /** @var Application */
-    protected $application;
+    protected Application $application;
 
     protected function setUp(): void
     {

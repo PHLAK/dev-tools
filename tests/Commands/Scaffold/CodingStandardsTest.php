@@ -9,10 +9,9 @@ use Tests\TestCase;
 class CodingStandardsTest extends TestCase
 {
     private const CONFIG_FILE_PATH = self::TEST_DATA_PATH . '/.php-cs-fixer.dist.php';
-    private const LIBRARY_FILE_PATH = self::TEST_DATA_PATH . '/../../vendor/phlak/coding-standards/stubs/.php-cs-fixer.dist.php';
+    private const STUB_FILE_PATH = self::STUBS_PATH . '/php-cs-fixer/.php-cs-fixer.dist.php';
 
-    /** @var CommandTester */
-    private $command;
+    private CommandTester $command;
 
     protected function setUp(): void
     {
@@ -39,6 +38,6 @@ class CodingStandardsTest extends TestCase
         $this->assertEquals(Command::SUCCESS, $this->command->getStatusCode());
 
         $this->assertFileExists(self::CONFIG_FILE_PATH);
-        $this->assertFileEquals(self::CONFIG_FILE_PATH, self::LIBRARY_FILE_PATH);
+        $this->assertFileEquals(self::STUB_FILE_PATH, self::CONFIG_FILE_PATH);
     }
 }
