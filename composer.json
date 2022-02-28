@@ -10,7 +10,6 @@
         }
     ],
     "require": {
-        "php": "^8.0 || ^8.1",
         "captainhook/captainhook": "^5.0",
         "captainhook/plugin-composer": "^5.0",
         "friendsofphp/php-cs-fixer": "^3.0",
@@ -19,7 +18,7 @@
         "phpstan/phpstan-phpunit": "^1.0",
         "phpunit/phpunit": "^9.0",
         "psy/psysh": "^0.11.0",
-        "symfony/console": "^5.0"
+        "symfony/console": "^5.0 || ^6.0"
     },
     "require-dev": {
         "yoast/phpunit-polyfills": "^1.0"

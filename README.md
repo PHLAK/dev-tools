@@ -14,11 +14,6 @@ An opiniated set of development packages and tools.
   - [`phpunit/phpunit`](https://phpunit.de/)
   - [`psy/psysh`](https://psysh.org/)
 
-## Requirements
-
-  - [PHP](https://www.php.net/) >= 8.0
-  - [Composer](https://getcomposer.org/)
-
 ## Usage
 
 Scaffold (all) project development files.
