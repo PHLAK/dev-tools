@@ -1,6 +1,3 @@
-includes:
-  - phpstan-ignores.neon
-
 parameters:
 
   paths:
@@ -11,7 +8,6 @@ parameters:
 
   checkFunctionNameCase: true
   checkMissingIterableValueType: false
-  checkModelProperties: true
 
   exceptions:
     implicitThrows: false
