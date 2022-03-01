@@ -1,0 +1,56 @@
+name: Test Suite
+on: [push]
+
+jobs:
+  coding-standards:
+    name: Coding Standards
+    runs-on: 'ubuntu-latest'
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install PHP Dependencies
+        run: composer install --no-interaction --no-progress --no-scripts --prefer-dist
+
+      - name: Verify Coding Standards
+        run: vendor/bin/php-cs-fixer fix --diff --dry-run
+
+  static-analysis:
+    name: Static Analysis
+    runs-on: 'ubuntu-latest'
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install PHP Dependencies
+        run: composer install --no-interaction --no-progress --no-scripts --prefer-dist
+
+      - name: Run Static Analysis
+        run: vendor/bin/phpstan analyze --no-progress
+
+  tests:
+    name: Tests
+    runs-on: 'ubuntu-latest'
+
+    strategy:
+      matrix:
+        php-versions: ['8.0', '8.1']
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          coverage: xdebug
+
+      - name: Install PHP Dependencies
+        run: composer install --no-interaction --no-progress --no-scripts --prefer-dist
+
+      - name: Run Tests
+        run: vendor/bin/phpunit
+
