@@ -3,6 +3,7 @@
 namespace PHLAK\DevTools\Commands\Scaffold;
 
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -24,6 +25,12 @@ class StaticAnalysis extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        if (! is_string($input->getArgument('path'))) {
+            $output->writeln('<warning>The path must be a string</warning>');
+
+            return self::FAILURE;
+        }
+
         if (file_exists(self::CONFIG_FILE_NAME)) {
             /** @var QuestionHelper $helper */
             $helper = $this->getHelper('question');
@@ -31,11 +38,11 @@ class StaticAnalysis extends Command
             if (! $helper->ask($input, $output, new ConfirmationQuestion('<question>Configuration file already exists. Overwrite?</question> (y|N) ', false))) {
                 $output->writeln('<fg=yellow>Aborted!</>');
 
-                return Command::SUCCESS;
+                return self::SUCCESS;
             }
         }
 
-        if (! copy(self::CONFIG_FILE_STUB, (string) $input->getArgument('path') . '/' . self::CONFIG_FILE_NAME)) {
+        if (! copy(self::CONFIG_FILE_STUB, $input->getArgument('path') . '/' . self::CONFIG_FILE_NAME)) {
             $output->writeln('<error>Failed to initialze coding standards configuration</error>');
 
             return self::FAILURE;

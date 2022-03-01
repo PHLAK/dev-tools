@@ -1,0 +1,22 @@
+parameters:
+
+  paths:
+    - src
+    - tests
+
+  level: max
+
+  checkFunctionNameCase: true
+  checkMissingIterableValueType: false
+
+  exceptions:
+    implicitThrows: false
+
+    check:
+      missingCheckedExceptionInThrows: true
+      tooWideThrowType: true
+
+    uncheckedExceptionClasses:
+      - 'LogicException'
+      - 'PHPUnit\Framework\Exception'
+      - 'RuntimeException'

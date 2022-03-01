@@ -2,6 +2,7 @@
 
 namespace PHLAK\DevTools\Commands\Scaffold;
 
+use Exception;
 use PHLAK\CodingStandards\Commands\Initialize;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -22,9 +23,15 @@ class CodingStandards extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        (new Initialize)->run(new ArrayInput([
-            'path' => $input->getArgument('path'),
-        ]), $output);
+        try {
+            (new Initialize)->run(new ArrayInput([
+                'path' => $input->getArgument('path'),
+            ]), $output);
+        } catch (Exception) {
+            $output->writeln('<error>Failed to initialize coding standards configuration</error>');
+
+            return self::FAILURE;
+        }
 
         $output->writeln('Initialized coding standards configuration');
 
