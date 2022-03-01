@@ -3,6 +3,7 @@
 namespace PHLAK\DevTools\Bootstrap;
 
 use PHLAK\DevTools\Commands\Scaffold\CodingStandards;
+use PHLAK\DevTools\Commands\Scaffold\StaticAnalysis;
 use Symfony\Component\Console\Application;
 
 class AppManager
@@ -11,7 +12,10 @@ class AppManager
     {
         $application = new Application;
 
-        $application->add(new CodingStandards);
+        $application->addCommands([
+            new CodingStandards,
+            new StaticAnalysis,
+        ]);
 
         return $application;
     }
